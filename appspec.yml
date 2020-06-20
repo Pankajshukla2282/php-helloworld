@@ -1,5 +1,22 @@
 version: 0.0
 os: linux
 files:
-  - source: /
+  - source: app
     destination: /usr/share/nginx/html/hello
+  - source: Config/phpfpm.conf
+    destination: /etc/nginx/default.d/
+hooks:
+  BeforeInstall:
+    - location: Scripts/PreDeploy.sh
+      timeout: 120
+      runas: root
+  
+  Install:
+    - location: Scripts/Install.sh
+      timeout: 10
+      runas: root
+
+  AfterInstall:
+    - location: Scripts/PostDeploy.sh
+      timeout: 30
+      runas: root

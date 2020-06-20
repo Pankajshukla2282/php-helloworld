@@ -1,0 +1,18 @@
+version: 0.2
+
+run-as: root
+
+phases:
+  install:
+    commands:
+      - yum update -y
+      - yum install nginx php php-fpm -y
+  pre_build:
+    commands:
+      - echo Nothing to do in the pre_build phase...
+  build:
+    commands:
+      - echo Build started on `date`
+  post_build:
+    commands:
+      - echo Build completed on `date`
